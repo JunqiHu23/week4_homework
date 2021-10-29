@@ -3,7 +3,9 @@ library(here)
 library(tidyverse)
 library(janitor)
 library(countrycode)
+library(tmap)
 
+#read files
 HDI <- read.csv(here('Data','Gender Inequality Index (GII).csv'),
                 header = TRUE,
                 sep = ",",
@@ -16,7 +18,7 @@ World <- st_read(here('Data',
                       'World_Countries_(Generalized)',
                       'World_Countries__Generalized_.shp'))
 
-
+#join
 HDI_data <- HDI %>%
   clean_names() %>%
   select(country,x2010,x2019) %>%
@@ -32,4 +34,9 @@ Join_data <- World_data %>%
   left_join(.,
             HDI_data,
             by=c('ISO_code_World'='ISO_code_HDI'))
-  
+
+
+#map
+tmap_mode("plot")
+Join_data %>%
+  qtm(.,fill = "diff")
