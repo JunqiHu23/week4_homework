@@ -35,5 +35,31 @@ World <- st_read(here('Data',
 
 ```
 
+## Join Data
+```{r Join Data}
+HDI_data <- HDI %>%
+  clean_names() %>%
+  select(country,x2010,x2019) %>%
+  mutate(diff=x2019-x2010) %>%
+  mutate(ISO_code_HDI=countrycode(country,origin = "country.name",destination = 'iso3c'))
+
+World_data <- World %>%
+  clean_names() %>%
+  mutate(ISO_code_World=countrycode(iso,origin = 'iso2c',destination = 'iso3c'))
+
+Join_data <- World_data %>%
+  clean_names() %>%
+  left_join(.,
+            HDI_data,
+            by=c('ISO_code_World'='ISO_code_HDI'))
+```
+
+
+#Plot Map
+```{r Plot Map}
+tmap_mode("plot")
+Join_data %>%
+  qtm(.,fill = "diff")
+```
 
 
