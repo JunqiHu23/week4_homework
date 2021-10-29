@@ -1,0 +1,19 @@
+---
+title: "homework4"
+author: "chris"
+date: "2021/10/29"
+output: html_document
+---
+
+
+# Ineqaulity task - week 4
+
+## Load packages
+```{r}
+library(sf)
+library(here)
+library(tidyverse)
+library(janitor)
+library(countrycode)
+library(tmap)
+```
