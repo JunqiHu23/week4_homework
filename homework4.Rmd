@@ -9,7 +9,7 @@ output: html_document
 # Ineqaulity task - week 4
 
 ## Load packages
-```{r}
+```{r Load packages}
 library(sf)
 library(here)
 library(tidyverse)
@@ -17,3 +17,23 @@ library(janitor)
 library(countrycode)
 library(tmap)
 ```
+
+
+##Read Files
+```{r Read Files}
+DI <- read.csv(here('Data','Gender Inequality Index (GII).csv'),
+                header = TRUE,
+                sep = ",",
+                skip = 5,
+                na="..",
+                nrows = 189,
+                encoding = "latin1")
+
+World <- st_read(here('Data',
+                      'World_Countries_(Generalized)',
+                      'World_Countries__Generalized_.shp'))
+
+```
+
+
+
